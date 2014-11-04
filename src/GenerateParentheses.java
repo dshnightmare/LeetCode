@@ -39,7 +39,7 @@ public class GenerateParentheses {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		List<String> l = new GenerateParentheses().generateParenthesis(1);
+		List<String> l = new GenerateParentheses().generateParenthesis(3);
 		for (String string : l) {
 			System.out.println(string);
 		}
