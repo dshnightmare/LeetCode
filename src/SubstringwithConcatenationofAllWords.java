@@ -34,7 +34,7 @@ public class SubstringwithConcatenationofAllWords {
 	
 	public List<Integer> findSubstring_2(String S, String[] L) {
 		HashMap<String, Integer> needToFind = new HashMap<>();
-		HashMap<String, Integer> hasFound;
+		HashMap<String, Integer> hasFound = new HashMap<>();
 		List<Integer> result = new ArrayList<>();
 		for (String string : L) {
 			if(needToFind.containsKey(string))
@@ -47,20 +47,49 @@ public class SubstringwithConcatenationofAllWords {
 		int lenS = S.length();
 		for(int i = 0; i < lenL; i++){
 			ss = new ArrayList<>();
+			hasFound.clear();
 			for(int j = i; j <= (lenS - lenL); j+=lenL){
 				ss.add(S.substring(j, j + lenL));
 			}
 			int count = 0;
 			for(int begin = 0, end = 0; end < ss.size(); end++){
-				if(needToFind.)
+				String s = ss.get(end);
+				if(!needToFind.containsKey(s)){
+					begin = end + 1;
+					count = 0;
+					hasFound.clear();
+					continue;
+				}
+				int num = hasFound.containsKey(s) ? hasFound.get(s) : 0;
+				if(num < needToFind.get(s)){
+					num++;
+					hasFound.put(s, num);
+					count++;
+				}
+				else {
+					while(!ss.get(begin).equals(s)){
+						count--;
+						hasFound.put(ss.get(begin), hasFound.get(ss.get(begin)) - 1);
+						begin++;
+					}
+					if(begin != end)
+						begin++;
+				}
+				if(count == L.length)
+					result.add(i + begin * lenL);
 			}
 		}
+		return result;
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String[] L = {"a"};
-		List<Integer> r = new SubstringwithConcatenationofAllWords().findSubstring("a", L);
+		String[] L = {"ab","ba","ab","ba"};
+		List<Integer> r = new SubstringwithConcatenationofAllWords().findSubstring("abaababbaba", L);
+		for (Integer integer : r) {
+			System.out.println(integer);
+		}
+		r = new SubstringwithConcatenationofAllWords().findSubstring_2("abaababbaba", L);
 		for (Integer integer : r) {
 			System.out.println(integer);
 		}
