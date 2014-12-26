@@ -14,17 +14,18 @@ public class PathSum2 {
 			return;
 		//leaf node
 		if(root.left == null && root.right == null && sum == root.val){
-			List<Integer> list = new ArrayList(path);
+			List<Integer> list = new ArrayList<>();
+			list.addAll(path);
 			list.add(root.val);
 			result.add(list);
 			return;
 		}
 		path.add(root.val);
 		if(root.left != null) {
-			findPathSum(root.left, sum + root.val, path);
+			findPathSum(root.left, sum - root.val, path);
 		}
 		if(root.right != null){
-			findPathSum(root.right, sum + root.val, path);
+			findPathSum(root.right, sum - root.val, path);
 		}
 		path.remove(path.size() - 1);
 	}
@@ -56,6 +57,6 @@ public class PathSum2 {
 	}
 	
 	public static void main(String[] args) {
-		
+		new PathSum2().test();
 	}
 }
