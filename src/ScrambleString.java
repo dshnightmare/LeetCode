@@ -12,10 +12,8 @@ public class ScrambleString {
 			for (int j = 0; j <= length - i; j++) {
 				for (int k = 0; k <= length - i; k++) {
 					for (int l = 1; l <= i - 1; l++) {
-						if ((status[l - 1][j][k + i - l] && status[i - l - 1][j
-								+ l][k])
-								|| (status[l - 1][j][k] && status[i - l - 1][j
-										+ l][k + l])) {
+						if ((status[l - 1][j][k + i - l] && status[i - l - 1][j + l][k])
+								|| (status[l - 1][j][k] && status[i - l - 1][j + l][k + l])) {
 							status[i - 1][j][k] = true;
 							break;
 						}
